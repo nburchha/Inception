@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   nginx:
-    env_file:
-      - "../.env"
-    build: requirements/nginx/.
+    build: srcs/requirements/nginx/
     container_name: nginx
     depends_on:
       - wordpress
@@ -17,24 +15,38 @@ services:
     networks:
       - inception
     restart: always
+    env_file: "../.env"
+
   wordpress:
-    build: requirements/wordpress/.
-    container_name: wp-php
+    build: srcs/requirements/wordpress/
+    container_name: wordpress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     volumes:
       - ./web:/var/www/html
     networks:
-      inception:
+      - inception
     restart: always
+    env_file: "../.env"
+
   mariadb:
-    build: requirements/mariadb/.
+    build: srcs/requirements/mariadb/
     container_name: mariadb
     volumes:
       - ./database:/var/lib/mysql
     networks:
-      inception:
+      - inception
     restart: always
+    env_file: "../.env"
+    healthcheck:
+      test: ["CMD", "mysqladmin", ping, "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 networks:
   inception:
+    name: inception
+    driver: bridge

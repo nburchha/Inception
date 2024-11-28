@@ -1,7 +1,7 @@
 #!/bin/bash
 
 envsubst '${DOMAIN}' < "/etc/nginx/sites-available/default" > "/etc/nginx/sites-available/default.tmp"
-mv /etc/nginx/sites-available/default.tmp /etx/nginx/sites-available/default
+mv /etc/nginx/sites-available/default.tmp /etc/nginx/sites-available/default
 
 openssl req -x509 \
 			-nodes \

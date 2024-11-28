@@ -1,11 +1,16 @@
 FROM debian:bullseye
 
-RUN apt update -y && apt upgrade -y && apt install -y mariadb-server
+RUN apt update -y && apt upgrade -y && apt install -y \
+	mariadb-server \
+	gettext-base
 
-COPY 50-server.cnf /etc/mysql/mariadb.conf.d/.
 COPY init.sql /etc/mysql/init.sql
+COPY 50-server.cnf /etc/mysql/mariadb.conf.d/.
 COPY script.sh .
 
-RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld && chmod +x script.sh
+RUN mkdir -p /run/mysqld
+# && chown mysql:mysql /run/mysqld && 
+
+RUN chmod +x script.sh
 
 CMD ["./script.sh"]
