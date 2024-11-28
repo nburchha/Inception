@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   nginx:
-    build: srcs/requirements/nginx/
+    build: requirements/nginx/
     container_name: nginx
     depends_on:
       - wordpress
@@ -18,7 +18,7 @@ services:
     env_file: "../.env"
 
   wordpress:
-    build: srcs/requirements/wordpress/
+    build: requirements/wordpress/
     container_name: wordpress
     depends_on:
       mariadb:
@@ -31,7 +31,7 @@ services:
     env_file: "../.env"
 
   mariadb:
-    build: srcs/requirements/mariadb/
+    build: requirements/mariadb/
     container_name: mariadb
     volumes:
       - ./database:/var/lib/mysql
