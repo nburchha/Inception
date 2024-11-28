@@ -10,11 +10,12 @@ services:
       - wordpress
       - mariadb
     ports:
-      - "80:80"
+      - "80:80" # TODO: remove port 80 (only possible if in vm)
+      - "443:443"
     volumes: # TODO: specify path for volumes like specified in subject
       - ./web:/var/www/html
     networks:
-      inception:
+      - inception
     restart: always
   wordpress:
     build: requirements/wordpress/.
