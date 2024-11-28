@@ -2,6 +2,8 @@ version: "3.8"
 
 services:
   nginx:
+    env_file:
+      - "../.env"
     build: requirements/nginx/.
     container_name: nginx
     depends_on:
@@ -9,7 +11,7 @@ services:
       - mariadb
     ports:
       - "80:80"
-    volumes:
+    volumes: # TODO: specify path for volumes like specified in subject
       - ./web:/var/www/html
     networks:
       inception:
