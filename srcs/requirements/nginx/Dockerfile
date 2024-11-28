@@ -1,6 +1,9 @@
 FROM debian:bullseye
 
-RUN apt update -y && apt upgrade -y && apt install -y nginx openssl
+RUN apt update -y && apt upgrade -y && apt install -y \
+		nginx \
+		openssl \
+		gettext-base
 
 COPY nginx.conf /etc/nginx/sites-available/default
 COPY script.sh .
