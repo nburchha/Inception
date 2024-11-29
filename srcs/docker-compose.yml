@@ -10,7 +10,7 @@ services:
     ports:
       - "80:80" # TODO: remove port 80 (only possible if in vm)
       - "443:443"
-    volumes: # TODO: /home/nburchha/data/web:/var/www/html
+    volumes:
       - web:/var/www/html
     networks:
       - inception
@@ -25,7 +25,7 @@ services:
       mariadb:
         condition: service_healthy
     volumes:
-      - web:/var/www/html # TODO /home/nburchha/data/web:/var/www/html
+      - web:/var/www/html
     networks:
       - inception
     restart: always
@@ -36,7 +36,7 @@ services:
     container_name: mariadb
     image: mariadb
     volumes:
-      - database:/var/lib/mysql # TODO: /home/nburchha/data/database:/var/lib/mysql
+      - database:/var/lib/mysql
     networks:
       - inception
     restart: always
