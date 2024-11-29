@@ -5,12 +5,6 @@ curl -o /usr/local/bin/wp -O https://raw.githubusercontent.com/wp-cli/builds/gh-
 chmod +x /usr/local/bin/wp
 wp core download --allow-root
 
-# Wait for MariaDB to start
-until nc -z -w50 mariadb 3306; do
-    echo "Waiting for MariaDB to start..."
-    sleep 1
-done
-
 # Creating wordpress config
 wp config create \
 	--dbname=$WP_DB_NAME \
