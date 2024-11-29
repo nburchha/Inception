@@ -12,3 +12,6 @@ WP_ADMIN_EMAIL=
 WP_USER=
 WP_USER_EMAIL=
 WP_USER_PASSWORD=
+
+DATABASE_VOLUME_PATH=/home/login/data/database
+WEB_VOLUME_PATH=/home/login/data/web

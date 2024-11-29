@@ -10,12 +10,12 @@ services:
     ports:
       - "80:80" # TODO: remove port 80 (only possible if in vm)
       - "443:443"
-    volumes: # TODO: specify path for volumes like specified in subject
-      - ./web:/var/www/html
+    volumes: # TODO: /home/nburchha/data/web:/var/www/html
+      - web:/var/www/html
     networks:
       - inception
     restart: always
-    env_file: "../.env"
+    env_file: ".env"
 
   wordpress:
     build: requirements/wordpress/
@@ -25,22 +25,22 @@ services:
       mariadb:
         condition: service_healthy
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html # TODO /home/nburchha/data/web:/var/www/html
     networks:
       - inception
     restart: always
-    env_file: "../.env"
+    env_file: ".env"
 
   mariadb:
     build: requirements/mariadb/
     container_name: mariadb
     image: mariadb
     volumes:
-      - ./database:/var/lib/mysql # TODO: specify path for volumes like specified in subject -> /home/nburchha/data
+      - database:/var/lib/mysql # TODO: /home/nburchha/data/database:/var/lib/mysql
     networks:
       - inception
     restart: always
-    env_file: "../.env"
+    env_file: ".env"
     healthcheck:
       test: ["CMD", "mysqladmin", ping, "-h", "localhost"]
       interval: 10s
@@ -52,3 +52,17 @@ networks:
   inception:
     name: inception
     driver: bridge
+
+volumes:
+  web:
+    name: web
+    driver_opts:
+      type: none
+      o: bind
+      device: ${WEB_VOLUME_PATH}
+  database:
+    name: database
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATABASE_VOLUME_PATH}
