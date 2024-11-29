@@ -20,7 +20,7 @@ wp config create \
 	--allow-root
 # Installing wordpress
 wp core install \
-	--url=$DOMAIN_NAME \
+	--url=$DOMAIN \
 	--title=$WP_TITLE \
 	--admin_user=$WP_ADMIN_USER \
 	--admin_password=$WP_ADMIN_PASSWORD \
