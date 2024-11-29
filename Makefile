@@ -8,8 +8,7 @@ down:
 	docker compose  -f $(COMPOSE_FILE) down
 
 reset:
-	rm -rf $(SRC_DIR)/database
-	rm -rf $(SRC_DIR)/web
+	docker volume rm web database
 
 re: down
 	docker compose -f $(COMPOSE_FILE) build --no-cache
@@ -18,6 +17,7 @@ re: down
 
 status:
 	docker compose  -f $(COMPOSE_FILE) ps
+	docker volume inspect web database
 
 logs:
 	docker compose  -f $(COMPOSE_FILE) logs -f --tail 10
