@@ -1,21 +1,6 @@
-# Ignore database files
-db/
-
-# Ignore logs
+database
+web
 logs/
 *.log
 
-# Ignore environment files
 .env
-
-# Ignore WordPress uploads
-wp-content/uploads/
-
-# Ignore generated files
-/var/lib/mysql/
-/run/mysqld/
-
-/web
-
-/database
-web/index.php
