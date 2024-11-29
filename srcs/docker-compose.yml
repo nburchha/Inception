@@ -3,10 +3,10 @@ version: "3.8"
 services:
   nginx:
     build: requirements/nginx/
+    image: nginx # after build directive, therefore thats the name of the builded image, an other image.
     container_name: nginx
     depends_on:
       - wordpress
-      - mariadb
     ports:
       - "80:80" # TODO: remove port 80 (only possible if in vm)
       - "443:443"
@@ -20,6 +20,7 @@ services:
   wordpress:
     build: requirements/wordpress/
     container_name: wordpress
+    image: wordpress
     depends_on:
       mariadb:
         condition: service_healthy
@@ -33,8 +34,9 @@ services:
   mariadb:
     build: requirements/mariadb/
     container_name: mariadb
+    image: mariadb
     volumes:
-      - ./database:/var/lib/mysql
+      - ./database:/var/lib/mysql # TODO: specify path for volumes like specified in subject -> /home/nburchha/data
     networks:
       - inception
     restart: always
