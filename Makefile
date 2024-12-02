@@ -7,7 +7,7 @@ endif
 
 all:
 	mkdir -p $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH)
-	docker compose -f $(COMPOSE_FILE) up -d
+	docker compose -f $(COMPOSE_FILE) up --build -d --remove-orphans --force-recreate
 
 down:
 	docker compose  -f $(COMPOSE_FILE) down
@@ -15,9 +15,9 @@ down:
 reset:
 	docker volume rm web database
 
-re: down
-	docker compose -f $(COMPOSE_FILE) build --no-cache
-	docker compose -f $(COMPOSE_FILE) up -d
+re: down all
+	# docker compose -f $(COMPOSE_FILE) build --no-cache
+	# docker compose -f $(COMPOSE_FILE) up -d
 
 
 status:
