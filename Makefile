@@ -1,7 +1,12 @@
 SRC_DIR = srcs
 COMPOSE_FILE=$(SRC_DIR)/docker-compose.yml
+ifneq (,$(wildcard $(SRC_DIR)/.env))
+	include $(SRC_DIR)/.env
+	export
+endif
 
 all:
+	mkdir -p $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH)
 	docker compose -f $(COMPOSE_FILE) up -d
 
 down:
