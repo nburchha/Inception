@@ -8,7 +8,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "80:80" # TODO: remove port 80 (only possible if in vm)
+    #   - "80:80" # TODO: remove port 80 (only possible if in vm)
       - "443:443"
     volumes:
       - web:/var/www/html
