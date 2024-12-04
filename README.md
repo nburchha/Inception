@@ -26,7 +26,8 @@
 - [ ] Confirm the student can log in to MariaDB and that the database is not empty.
   ```bash
   docker exec -it mariadb /bin/bash
-  mysql -u$WP_DB_USER -p$WP_DB_PASSWORD -h$WP_DB_HOST $WP_DB_NAME
+  mysql -u$WP_DB_USER -p
+  USE wordpress; SHOW TABLES;
 
 ## Project Overview
 - [ ] Student explains:
