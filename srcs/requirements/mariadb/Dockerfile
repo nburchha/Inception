@@ -9,7 +9,6 @@ COPY 50-server.cnf /etc/mysql/mariadb.conf.d/.
 COPY script.sh .
 
 RUN mkdir -p /run/mysqld
-# && chown mysql:mysql /run/mysqld && 
 
 RUN chmod +x script.sh
 
