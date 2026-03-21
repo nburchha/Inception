@@ -2,3 +2,13 @@ logs/
 *.log
 
 .env
+
+# Ignore Data Volumes
+data/
+volumes/
+
+# Ignore OS files
+.DS_Store
+
+# Random local files
+*.pdf
