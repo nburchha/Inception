@@ -23,6 +23,8 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     volumes:
       - web:/var/www/html
     networks:
@@ -46,6 +48,36 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+  
+  redis:
+    build: requirements/redis/
+    container_name: redis
+    image: redis
+    networks:
+      - inception
+    restart: always
+    env_file: ".env"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "redis-cli ping | grep -x PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ftp:
+    build: requirements/ftp/
+    container_name: ftp
+    image: ftp
+    ports:
+      - "21:21"
+      - "40000-40005:40000-40005"
+    volumes:
+      - web:/var/www/html
+    networks:
+      - inception
+    restart: always
+    env_file: ".env"
+    depends_on:
+      - wordpress
 
 networks:
   inception:
