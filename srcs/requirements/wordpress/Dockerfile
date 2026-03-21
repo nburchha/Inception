@@ -10,6 +10,7 @@ RUN apt update -y && apt upgrade -y && apt install -y \
 	php7.4-imagick \
 	php7.4-dom \
 	php7.4-zip \
+	php7.4-redis \
 	curl
 
 COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
