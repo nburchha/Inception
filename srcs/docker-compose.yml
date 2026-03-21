@@ -79,6 +79,17 @@ services:
     depends_on:
       - wordpress
 
+  static_site:
+    build: requirements/static_site/
+    container_name: static_site
+    image: static_site
+    ports:
+      - "3000:3000"
+    networks:
+      - inception
+    restart: always
+    env_file: ".env"
+
 networks:
   inception:
     name: inception
