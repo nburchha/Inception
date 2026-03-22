@@ -3,33 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Portfolio | Cloud Engineer</title>
+    <meta name="description" content="Portfolio of a Cloud Engineer and Wirtschaftsinformatik student specializing in Kubernetes, Terraform, and cloud-native technologies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>My Static Portfolio</h1>
-            <p>Full-Stack Developer | DevOps Enthusiast</p>
+    <div class="app-container">
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm a <span class="highlight">Cloud Engineer</span></h1>
+                <p class="subtitle">Wirtschaftsinformatik Student & Working Student @ STACKIT</p>
+                <div class="cta-group">
+                    <button id="helloBtn" class="btn btn-primary">Deploy Hello</button>
+                    <a href="#about" class="btn btn-secondary">Explore Stack</a>
+                </div>
+                <p id="greetingMessage" class="greeting-message" aria-live="polite"></p>
+            </div>
         </header>
         
-        <section class="about">
-            <h2>About Me</h2>
-            <p>I am a passionate software engineer with experience in Docker, Linux, and web technologies. Welcome to my showcase site built with vanilla HTML, CSS, and JS served by Node.js!</p>
-        </section>
+        <main>
+            <section id="about" class="section about">
+                <div class="section-content">
+                    <h2>About Me</h2>
+                    <div class="divider"></div>
+                    <p class="lead">I am a passionate Cloud Engineer specializing in Kubernetes, infrastructure as code, and the cloud-native ecosystem.</p>
+                    <p>Currently studying Wirtschaftsinformatik and working as a Cloud Engineer Working Student at STACKIT. I focus on building scalable architectures, automating infrastructure deployments, and ensuring robust system observability.</p>
+                </div>
+            </section>
 
-        <section class="skills">
-            <h2>Skills</h2>
-            <ul>
-                <li>Docker & Containers</li>
-                <li>NGINX & Web Servers</li>
-                <li>JavaScript / Node.js</li>
-                <li>System Administration</li>
-            </ul>
-        </section>
-        
-        <button id="helloBtn">Say Hello</button>
-        <p id="greetingMessage"></p>
+            <section id="skills" class="section skills-section bg-light">
+                <div class="section-content">
+                    <h2>Core Tech Stack</h2>
+                    <div class="divider"></div>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">☸️</div>
+                            <h3>Kubernetes</h3>
+                            <p>Orchestrating containerized applications, scaling, and cluster management.</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🏗️</div>
+                            <h3>Terraform</h3>
+                            <p>Provisioning cloud infrastructure reliably using Infrastructure as Code (IaC).</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">⚙️</div>
+                            <h3>Ansible</h3>
+                            <p>Automating configuration management and deployment workflows.</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📊</div>
+                            <h3>Grafana</h3>
+                            <p>Designing comprehensive observability dashboards and alerting systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2026 Cloud Engineering Portfolio. Built with passion and code.</p>
+            </div>
+        </footer>
     </div>
 
     <script src="script.js"></script>
