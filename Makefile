@@ -14,11 +14,11 @@ down:
 
 reset:
 	docker volume rm web database
+	rm -rf $(WEB_VOLUME_PATH)j $(DATABASE_VOLUME_PATH)
 
 re: down all
 	# docker compose -f $(COMPOSE_FILE) build --no-cache
 	# docker compose -f $(COMPOSE_FILE) up -d
-
 
 status:
 	docker compose  -f $(COMPOSE_FILE) ps
