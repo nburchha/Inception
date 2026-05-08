@@ -6,6 +6,8 @@ logs/
 # Ignore Data Volumes
 data/
 volumes/
+db/
+web/
 
 # Ignore OS files
 .DS_Store
