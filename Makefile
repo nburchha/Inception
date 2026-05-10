@@ -10,21 +10,24 @@ all:
 	docker compose -f $(COMPOSE_FILE) up --build -d --remove-orphans --force-recreate
 
 down:
-	docker compose  -f $(COMPOSE_FILE) down
+	docker compose -f $(COMPOSE_FILE) down
 
-reset:
-	docker volume rm web database
-	rm -rf $(WEB_VOLUME_PATH)j $(DATABASE_VOLUME_PATH)
+clean: down
+	docker system prune -af
 
-re: down all
-	# docker compose -f $(COMPOSE_FILE) build --no-cache
-	# docker compose -f $(COMPOSE_FILE) up -d
+fclean: clean
+	docker volume rm web database || true
+	rm -rf $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) || true
+
+reset: fclean
+
+re: fclean all
 
 status:
-	docker compose  -f $(COMPOSE_FILE) ps
-	docker volume inspect web database
+	docker compose -f $(COMPOSE_FILE) ps
+	docker volume inspect web database || true
 
 logs:
-	docker compose  -f $(COMPOSE_FILE) logs -f --tail 10
+	docker compose -f $(COMPOSE_FILE) logs -f --tail 10
 
-.PHONY: all down reset status logs
+.PHONY: all down clean fclean reset status logs re
