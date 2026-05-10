@@ -90,6 +90,20 @@ services:
     restart: always
     env_file: ".env"
 
+  adminer:
+    build: requirements/adminer/
+    container_name: adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    restart: always
+    env_file: ".env"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
 networks:
   inception:
     name: inception
