@@ -1,0 +1,41 @@
+endpoints:
+  - name: WordPress
+    group: Core
+    url: "https://nginx"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[STATUS] == 301"
+      - "[STATUS] == 302"
+    client:
+      insecure: true
+  - name: MariaDB
+    group: Core
+    url: "tcp://mariadb:3306"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+  - name: Redis
+    group: Core
+    url: "tcp://redis:6379"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+  - name: FTP
+    group: Core
+    url: "tcp://ftp:21"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+  - name: Static Site
+    group: Core
+    url: "http://static_site:3000"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+  - name: Adminer
+    group: Core
+    url: "http://adminer:8080"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"

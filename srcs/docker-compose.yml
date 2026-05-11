@@ -104,6 +104,19 @@ services:
       mariadb:
         condition: service_healthy
 
+  gatus:
+    build: requirements/gatus/
+    container_name: gatus
+    image: gatus
+    ports:
+      - "3001:8081"
+    volumes:
+      - gatus_data:/app/data
+    networks:
+      - inception
+    restart: always
+    env_file: ".env"
+
 networks:
   inception:
     name: inception
@@ -122,3 +135,9 @@ volumes:
       type: none
       o: bind
       device: ${DATABASE_VOLUME_PATH}
+  gatus_data:
+    name: gatus_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ${UPTIME_KUMA_VOLUME_PATH}
