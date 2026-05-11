@@ -109,7 +109,7 @@ services:
     container_name: gatus
     image: gatus
     ports:
-      - "3001:8081"
+      - "3001:8080"
     volumes:
       - gatus_data:/app/data
     networks:
@@ -140,4 +140,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${UPTIME_KUMA_VOLUME_PATH}
+      device: ${GATUS_VOLUME_PATH}
