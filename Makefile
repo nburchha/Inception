@@ -6,7 +6,7 @@ ifneq (,$(wildcard $(SRC_DIR)/.env))
 endif
 
 all:
-	mkdir -p $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH)
+	mkdir -p $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) $(GATUS_VOLUME_PATH)
 	docker compose -f $(COMPOSE_FILE) up --build -d --remove-orphans --force-recreate
 
 down:
@@ -16,8 +16,8 @@ clean: down
 	docker system prune -af
 
 fclean: clean
-	docker volume rm web database || true
-	rm -rf $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) || true
+	docker volume rm web database gatus_data || true
+	rm -rf $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) $(GATUS_VOLUME_PATH) || true
 
 reset: fclean
 
