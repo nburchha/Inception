@@ -7,6 +7,8 @@ services:
     container_name: nginx
     depends_on:
       - wordpress
+      - static_site
+      - gatus
     ports:
       - "443:443"
     volumes:
@@ -83,8 +85,6 @@ services:
     build: requirements/static_site/
     container_name: static_site
     image: static_site
-    ports:
-      - "3000:3000"
     networks:
       - inception
     restart: always
@@ -108,8 +108,6 @@ services:
     build: requirements/gatus/
     container_name: gatus
     image: gatus
-    ports:
-      - "3001:8080"
     volumes:
       - gatus_data:/app/data
     networks:
