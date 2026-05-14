@@ -1,3 +1,7 @@
+storage:
+  type: sqlite
+  path: /app/data/data.db
+
 web:
   port: 8080
 
