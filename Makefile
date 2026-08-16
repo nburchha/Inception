@@ -30,4 +30,10 @@ status:
 logs:
 	docker compose -f $(COMPOSE_FILE) logs -f --tail 10
 
-.PHONY: all down clean fclean reset status logs re
+test:
+	bash tests/run.sh
+
+test-full:
+	bash tests/run.sh --full
+
+.PHONY: all down clean fclean reset status logs re test test-full
