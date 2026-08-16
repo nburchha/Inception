@@ -6,9 +6,12 @@ services:
     image: nginx # after build directive, therefore thats the name of the builded image, an other image.
     container_name: nginx
     depends_on:
-      - wordpress
-      - static_site
-      - gatus
+      wordpress:
+        condition: service_healthy
+      static_site:
+        condition: service_started
+      gatus:
+        condition: service_started
     ports:
       - "443:443"
     volumes:
@@ -17,6 +20,14 @@ services:
       - inception
     restart: always
     env_file: ".env"
+    healthcheck:
+      # nginx generates its self-signed cert before exec'ing, so "container
+      # started" isn't "accepting TLS" -- do a real TLSv1.2 handshake.
+      test: ["CMD-SHELL", "echo | openssl s_client -connect 127.0.0.1:443 -tls1_2 >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
 
   wordpress:
     build: requirements/wordpress/
@@ -33,6 +44,16 @@ services:
       - inception
     restart: always
     env_file: ".env"
+    healthcheck:
+      # script.sh runs the entire `wp core install`/plugin-activation sequence
+      # before its final `exec php-fpm7.4 -F`, so port 9000 only starts
+      # accepting connections once that whole install has finished -- this is
+      # a genuine "WordPress is ready" signal, not just "container started".
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/wordpress/9000' 2>/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 40s
 
   mariadb:
     build: requirements/mariadb/

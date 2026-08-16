@@ -7,7 +7,7 @@ endif
 
 all:
 	mkdir -p $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) $(GATUS_VOLUME_PATH)
-	docker compose -f $(COMPOSE_FILE) up --build -d --remove-orphans --force-recreate
+	docker compose -f $(COMPOSE_FILE) up --build -d --remove-orphans --force-recreate --wait --wait-timeout 180
 
 down:
 	docker compose -f $(COMPOSE_FILE) down
