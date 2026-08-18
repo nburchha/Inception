@@ -41,13 +41,17 @@ source "$ROOT_DIR/tests/lib/assert.sh"
 
 # Check files are picked up by naming convention, sorted, so new categories
 # just need to be dropped into tests/checks/ without touching this runner.
-# 05_bonus.sh is skippable via --mandatory-only; 99_disruptive.sh only runs
-# with --full/--disruptive; everything else always runs.
+# 05_bonus.sh is skippable via --mandatory-only; 07_wp_functional.sh and
+# 99_disruptive.sh only run with --full/--disruptive (they write real content
+# into the live site / interrupt the running stack); everything else always runs.
 for f in "$ROOT_DIR"/tests/checks/*.sh; do
 	base="$(basename "$f")"
 	case "$base" in
 	05_bonus.sh)
 		[ "$MANDATORY_ONLY" -eq 1 ] && continue
+		;;
+	07_wp_functional.sh)
+		[ "$FULL" -eq 0 ] && continue
 		;;
 	99_disruptive.sh)
 		[ "$FULL" -eq 0 ] && continue
