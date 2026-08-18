@@ -17,7 +17,7 @@ clean: down
 
 fclean: clean
 	docker volume rm web database gatus_data || true
-	rm -rf $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) $(GATUS_VOLUME_PATH) || true
+	sudo rm -rf $(WEB_VOLUME_PATH) $(DATABASE_VOLUME_PATH) $(GATUS_VOLUME_PATH) || true
 
 reset: fclean
 
