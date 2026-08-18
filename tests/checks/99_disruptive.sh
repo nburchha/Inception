@@ -43,6 +43,37 @@ if [ "$(docker inspect -f '{{.State.Running}}' mariadb 2>/dev/null)" = "true" ];
 	else
 		fail "wp_options row count survives a compose down/up cycle (before=$before, after=$after)"
 	fi
+
+	# --- config-modification approximation ---
+	# Reuses the down/up cycle above rather than mutating the stack a second
+	# time. This approximates the eval's live "reviewer requests a config
+	# change, learner rebuilds/restarts" exercise, which is otherwise an
+	# inherently manual, reviewer-driven step -- it only proves the mechanics
+	# (down/up -> all services up, site reachable) hold, not that any specific
+	# requested change was correctly applied.
+	SERVICES=(nginx wordpress mariadb redis ftp static_site adminer gatus)
+	all_up=1
+	for svc in "${SERVICES[@]}"; do
+		[ "$(docker inspect -f '{{.State.Running}}' "$svc" 2>/dev/null)" = "true" ] || all_up=0
+	done
+	if [ "$all_up" -eq 1 ]; then
+		pass "all 8 services are running again after a down/up (rebuild-style) cycle"
+	else
+		fail "all 8 services are running again after a down/up (rebuild-style) cycle"
+	fi
+
+	reachable=0
+	for _ in $(seq 1 30); do
+		code="$(curl -sk -o /dev/null -m 5 -w '%{http_code}' "https://${DOMAIN:-localhost}/" 2>/dev/null)"
+		[ "$code" = "200" ] && { reachable=1; break; }
+		sleep 2
+	done
+	if [ "$reachable" -eq 1 ]; then
+		pass "WordPress is reachable over HTTPS after the down/up cycle"
+	else
+		fail "WordPress is reachable over HTTPS after the down/up cycle"
+	fi
 else
 	skip "persistence check (mariadb not running)"
+	skip "config-modification approximation (mariadb not running)"
 fi
