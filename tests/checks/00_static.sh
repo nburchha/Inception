@@ -82,15 +82,6 @@ for svc in "${SERVICES[@]}"; do
 		assert_not_match_i "$svc Dockerfile does not install or configure nginx" "$content" 'nginx'
 	fi
 
-	# image: in compose must match the service's own name (static config check;
-	# see 01_containers.sh for the corresponding live/dynamic check).
-	img_line="$(awk -v svc="$svc" '
-		$0 ~ "^  "svc":" {infield=1; next}
-		infield && /^  [A-Za-z_]/ {infield=0}
-		infield && /^\s*image:/ {print; exit}
-	' "$COMPOSE_FILE")"
-	assert_match "'$svc' compose service declares image: matching its own service name" \
-		"$img_line" "image:[[:space:]]*${svc}([:[:alnum:]._-]+)?[[:space:]]*(#.*)?\$"
 done
 
 while IFS= read -r -d '' sh; do
