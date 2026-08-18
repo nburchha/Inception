@@ -21,6 +21,7 @@ if [ -f "$README" ]; then
 	assert_match_i "README compares Secrets vs Environment Variables" "$readme" 'secrets.*environment variable'
 	assert_match_i "README compares Docker Network vs Host Network" "$readme" 'docker network.*host network'
 	assert_match_i "README compares Docker Volumes vs Bind Mounts" "$readme" 'volumes.*bind mount'
+	assert_match_i "README justifies the custom bonus service 'gatus' by name" "$readme" 'gatus'
 fi
 
 assert_file_exists "USER_DOC.md exists at repo root" "$USER_DOC"
