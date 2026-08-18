@@ -39,4 +39,4 @@ if [ ! -f "wp-config.php" ]; then
 	chown -R www-data:www-data /var/www/html
 fi
 
-exec php-fpm7.4 -F
+exec php-fpm8.2 -F

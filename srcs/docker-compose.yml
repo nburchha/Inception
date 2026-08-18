@@ -46,7 +46,7 @@ services:
     env_file: ".env"
     healthcheck:
       # script.sh runs the entire `wp core install`/plugin-activation sequence
-      # before its final `exec php-fpm7.4 -F`, so port 9000 only starts
+      # before its final `exec php-fpm8.2 -F`, so port 9000 only starts
       # accepting connections once that whole install has finished -- this is
       # a genuine "WordPress is ready" signal, not just "container started".
       test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/wordpress/9000' 2>/dev/null"]

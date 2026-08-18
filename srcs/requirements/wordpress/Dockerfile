@@ -1,21 +1,21 @@
 FROM debian:bookworm
 
 RUN apt update -y && apt upgrade -y && apt install -y \
-	php7.4-fpm \
-	php7.4-mysqli \
-	php7.4-curl \
-	php7.4-gd \
-	php7.4-intl \
-	php7.4-mbstring \
-	php7.4-imagick \
-	php7.4-dom \
-	php7.4-zip \
-	php7.4-redis \
+	php8.2-fpm \
+	php8.2-mysqli \
+	php8.2-curl \
+	php8.2-gd \
+	php8.2-intl \
+	php8.2-mbstring \
+	php8.2-imagick \
+	php8.2-dom \
+	php8.2-zip \
+	php8.2-redis \
 	curl
 
-COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-RUN mkdir /run/php
+RUN mkdir -p /run/php
 COPY script.sh /usr/local/bin/script.sh
 RUN chmod +x /usr/local/bin/script.sh
 

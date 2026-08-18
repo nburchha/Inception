@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y php7.4 php7.4-mysql wget && \
+    apt-get install -y php8.2 php8.2-mysql wget && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/www/html
