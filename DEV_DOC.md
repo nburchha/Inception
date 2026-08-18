@@ -33,7 +33,7 @@ This creates the host volume directories and runs, under the hood:
 docker compose -f srcs/docker-compose.yml up --build -d --wait
 ```
 Each service has its own Dockerfile under `srcs/requirements/<service>/`, built from
-Debian bullseye or Alpine (never `latest`). Images are never pulled pre-built.
+Debian bookworm or Alpine (never `latest`). Images are never pulled pre-built.
 
 ## 5. Container and volume management
 | Task | Command |

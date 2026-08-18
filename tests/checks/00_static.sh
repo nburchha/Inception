@@ -21,9 +21,9 @@ fi
 # NOTE: this is a point-in-time judgment call, not a permanent fact -- Debian
 # and Alpine release cadence moves. Re-check https://www.debian.org/releases/
 # and https://alpinelinux.org/releases/ periodically and update this list;
-# don't assume "bullseye" stays correct forever.
+# don't assume "bookworm" stays correct forever.
 ALLOWED_BASE_IMAGES=(
-	"debian:bullseye" "debian:bookworm"
+	"debian:bookworm"
 	"alpine:3.19" "alpine:3.20" "alpine:3.21" "alpine:3.22" "alpine:3.23"
 )
 

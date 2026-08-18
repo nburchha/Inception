@@ -13,7 +13,7 @@ to see "is everything actually up", which none of the other bonus services provi
 
 **Main design choices:**
 - **Containerization:** every service runs in its own container, built from a
-  Dockerfile (`penultimate stable` Debian bullseye or Alpine, no `latest` tags).
+  Dockerfile (`penultimate stable` Debian bookworm or Alpine, no `latest` tags).
 - **Orchestration:** `docker compose` builds, links, and manages the lifecycle of all
   containers via `srcs/docker-compose.yml`, driven by the root `Makefile`.
 - **Secrets:** no credentials are hardcoded; all sensitive values are injected via a
